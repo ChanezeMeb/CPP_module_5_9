@@ -9,16 +9,16 @@ OBJ = $(SRC:.cpp=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ)
-        $(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJ) -o $(NAME)
 
 %.o : %.cpp
-        $(CXX) $(CXXFLAGS) -c $< -o $@
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean :
-        $(RM) $(OBJ)
+	$(RM) $(OBJ)
 
 fclean : clean
-        $(RM) $(NAME)
+	$(RM) $(NAME)
 
 re : fclean all
 
