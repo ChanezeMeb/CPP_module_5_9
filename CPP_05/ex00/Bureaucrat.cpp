@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/27 10:19:00 by chamebar          #+#    #+#             */
-/*   Updated: 2025/11/29 16:25:02 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/11/29 17:07:28 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ Bureaucrat::Bureaucrat() : _name("Default"), _grade(150)
 Bureaucrat::Bureaucrat(const std::string& name, int grade) : _name(name)
 {
     if (grade < 1)
-        throw Bureaucrat::GradeTooHighException("Grade is too hight");
+        throw GradeTooHighException();
     if (grade > 150)
-        throw Bureaucrat::GradeTooLowException("Grade is too low");
+        throw GradeTooLowException();
     _grade = grade;
 }
 
@@ -57,23 +57,22 @@ int Bureaucrat::getGrade() const
 }
 
 //Methodes
-void incrementGrade(); //diminue le chiffre
-void decrementGrade(); //augmente le chiffre
-        
-        //classes d'exceptions imbriquees 
-        class GradeTooHighException : public std::exception
-        {
-            public :
-                virtual const char *what() const throw();
+void Bureaucrat::incrementGrade()
+{
+    if (_grade - 1 < 1)
+        throw GradeTooHighException();
+    _grade--; 
+} //diminue le chiffre
+void Bureaucrat::decrementGrade()
+{
+    if (_grade + 1 > 150)
+        throw GradeTooLowException();
+    _grade++;
+} //augmente le chiffre
 
-        };
+const char* Bureaucrat::GradeTooHighException::what() const throw()
+{
+      return ()
+}
 
-        class GradeTooLowException : public std::exception
-        {
-            public :
-                virtual const char *what() const throw();
 
-        };
-
-const char *Bureaucrat::GradeTooHighException
-        
