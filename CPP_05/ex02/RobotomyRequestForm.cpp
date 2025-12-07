@@ -5,7 +5,7 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm("Robotomy Request", 72, 45), 
     std::cout << "RobotomyRequestForm default constructor" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Robotomy Request", 25, 5), _target(target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target) : AForm("Robotomy Request", 72, 45), _target(target)
 {
     std::cout << "RobotomyRequestForm parametric constructor" << std::endl;
 }

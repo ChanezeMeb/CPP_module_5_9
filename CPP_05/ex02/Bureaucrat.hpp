@@ -15,9 +15,9 @@
 
 #include <iostream>
 #include <string>
-#include "Form.hpp"
+#include "AForm.hpp"
 
-class Form;
+class AForm;
 
 class Bureaucrat
 {
@@ -41,8 +41,9 @@ class Bureaucrat
         //Methodes
         void incrementGrade(); //diminue le chiffre
         void decrementGrade(); //augmente le chiffre
-        void signForm(Form &form); //bureaucrat qui essaie de signer le formulaire
-        
+        void signForm(AForm &form); //bureaucrat qui essaie de signer le formulaire
+        void executeForm(AForm &form) const;
+
         //classes d'exceptions imbriquees 
         class GradeTooHighException : public std::exception
         {
