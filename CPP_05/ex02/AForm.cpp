@@ -37,7 +37,7 @@ AForm::AForm(const AForm &other) : _name(other._name), _gradeToSign(other._grade
 
 AForm &AForm::operator=(const AForm &other)
 {
-    std::cout << "AForm copy assigment" << std::endl;
+    std::cout << "Form copy assigment" << std::endl;
     if(this != &other)
     {
         _signed = other._signed;
@@ -78,6 +78,11 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
       return ("Grade too low !");
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+      return ("Form is not signed !");
 }
 
 void AForm::beSigned(const Bureaucrat &bureaucrat)
