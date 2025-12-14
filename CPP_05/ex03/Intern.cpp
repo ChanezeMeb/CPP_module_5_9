@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:45:15 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/14 15:59:16 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/14 16:04:39 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,11 @@ Intern::~Intern()
 
 AForm* Intern::makeForm(const std::string& forName, const std::string& target)
 {
-    std::string names[3] = {"shrubbery"}
+    std::string names[3] = {
+        "shrubbery creation",
+        "robotomy request",
+        "presidential pardon"
+    };
+    
+    AForm* (*creators[4])(const s)
 }
