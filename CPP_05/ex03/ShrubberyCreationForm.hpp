@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   ShrubberyCreationForm.hpp                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 14:46:02 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/14 14:46:03 by chamebar         ###   ########.fr       */
+/*   Created: 2025/12/14 14:47:34 by chamebar          #+#    #+#             */
+/*   Updated: 2025/12/14 14:47:35 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef SHRUBBERYCREATIONFORM_HPP
+# define SHRUBBERYCREATIONFORM_HPP
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "AForm.hpp"
 
-class PresidentialPardonForm : public AForm
+class ShrubberyCreationForm : public AForm
 {
     private :
         std::string _target;
     public :
          //Forme canonique
-        PresidentialPardonForm();
-        PresidentialPardonForm(const PresidentialPardonForm &other);
-        PresidentialPardonForm& operator=(const PresidentialPardonForm &other);
-        ~PresidentialPardonForm();
+        ShrubberyCreationForm();
+        ShrubberyCreationForm(const ShrubberyCreationForm &other);
+        ShrubberyCreationForm& operator=(const ShrubberyCreationForm &other);
+        ~ShrubberyCreationForm();
 
         //Forme avec parametres
-        PresidentialPardonForm(const std::string &target);
+        ShrubberyCreationForm(const std::string &target);
 
         virtual void execute(Bureaucrat const &executor) const;
 };

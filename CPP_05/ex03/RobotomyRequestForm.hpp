@@ -1,35 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   PresidentialPardonForm.hpp                         :+:      :+:    :+:   */
+/*   RobotomyRequestForm.hpp                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/14 14:46:02 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/14 14:46:03 by chamebar         ###   ########.fr       */
+/*   Created: 2025/12/14 14:47:22 by chamebar          #+#    #+#             */
+/*   Updated: 2025/12/14 14:47:23 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PRESIDENTIALPARDONFORM_HPP
-# define PRESIDENTIALPARDONFORM_HPP
+#ifndef ROBOTOMYREQUESTFORM_HPP
+# define ROBOTOMYREQUESTFORM_HPP
 
 #include <string>
 #include <iostream>
+#include <cstdlib>
 #include "AForm.hpp"
 
-class PresidentialPardonForm : public AForm
+class RobotomyRequestForm : public AForm
 {
     private :
         std::string _target;
     public :
          //Forme canonique
-        PresidentialPardonForm();
-        PresidentialPardonForm(const PresidentialPardonForm &other);
-        PresidentialPardonForm& operator=(const PresidentialPardonForm &other);
-        ~PresidentialPardonForm();
+        RobotomyRequestForm();
+        RobotomyRequestForm(const RobotomyRequestForm &other);
+        RobotomyRequestForm& operator=(const RobotomyRequestForm &other);
+        ~RobotomyRequestForm();
 
         //Forme avec parametres
-        PresidentialPardonForm(const std::string &target);
+        RobotomyRequestForm(const std::string &target);
 
         virtual void execute(Bureaucrat const &executor) const;
 };
