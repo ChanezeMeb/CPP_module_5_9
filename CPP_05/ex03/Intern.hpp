@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/14 14:46:47 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/14 15:44:37 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/15 11:51:25 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@
 class Intern
 {
     private :
-        AForm* CreateShrubberyForm(const std::string &target);
-        AForm* CreateRobotomyForm(const std::string &target);
-        AForm* CreatePresidentialPardonForm(const std::string &target);
+        AForm* createShrubberyForm(const std::string &target);
+        AForm* createRobotomyForm(const std::string &target);
+        AForm* createPresidentialPardonForm(const std::string &target);
     public :
         Intern();
         Intern(const Intern &other);
         Intern &operator=(const Intern &other);
         ~Intern();
 
-        AForm* makeForm(const std::string& forName, const std::string& target);
+        AForm* makeForm(const std::string& formName, const std::string& target);
 };
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/01 13:28:19 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/03 22:08:25 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/15 13:19:43 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class AForm
         AForm();
         AForm(const AForm &other);
         AForm& operator=(const AForm &other);
-        ~AForm();
+        virtual ~AForm();
 
         //Forme avec parametres
         AForm(const std::string &name, int gradeToSign, int gradeToExecute);
