@@ -1,16 +1,11 @@
-NAME = AForm
+NAME = ScalarConverter
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -MMD -MP
-SRC = Bureaucrat.cpp \
-	  AForm.cpp \
-	  PresidentialPardonForm.cpp \
-	  RobotomyRequestForm.cpp \
-	  ShrubberyCreationForm.cpp \
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+SRC =  \
 	  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
-DEP = $(OBJ:.o=.d)
 
 all : $(NAME)
 
@@ -21,13 +16,11 @@ $(NAME) : $(OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean :
-	$(RM) $(OBJ) $(DEP)
+	$(RM) $(OBJ) 
 
 fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
-
--include $(DEP)
 
 .PHONY : all clean fclean re

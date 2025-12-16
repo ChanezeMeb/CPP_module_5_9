@@ -1,11 +1,13 @@
 NAME = Form
 RM = rm -rf
 CXX = c++
-CXXFLAGS = -Wall -Werror -Wextra -std=c++98
+CXXFLAGS = -Wall -Werror -Wextra -std=c++98 -MMD -MP
 SRC = Bureaucrat.cpp \
 	  Form.cpp \
 	  main.cpp
+
 OBJ = $(SRC:.cpp=.o)
+DEP = $(OBJ:.o=.d)
 
 all : $(NAME)
 
@@ -16,11 +18,13 @@ $(NAME) : $(OBJ)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 clean :
-	$(RM) $(OBJ)
+	$(RM) $(OBJ) $(DEP)
 
 fclean : clean
 	$(RM) $(NAME)
 
 re : fclean all
+
+-include $(DEP)
 
 .PHONY : all clean fclean re
