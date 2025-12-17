@@ -2,7 +2,7 @@ NAME = ScalarConverter
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRC =  \
+SRC = ScalarConverter.cpp \
 	  main.cpp
 
 OBJ = $(SRC:.cpp=.o)
