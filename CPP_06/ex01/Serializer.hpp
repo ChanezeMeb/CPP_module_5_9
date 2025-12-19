@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 07:09:13 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/19 07:25:18 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 08:56:21 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define SERIALIZER_HPP
 
 #include "Data.hpp"
-#include <cstdint>
+#include <stdint.h>
 #include <iostream>
 
 class Serializer
@@ -26,7 +26,7 @@ class Serializer
         ~Serializer();
     public :
         static uintptr_t serialize(Data* ptr);
-        static uintptr_t deserialize(uintptr_t raw);         
+        static Data* deserialize(uintptr_t raw);         
 };
 
 #endif

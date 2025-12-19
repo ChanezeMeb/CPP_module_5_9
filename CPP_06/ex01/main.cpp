@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 07:10:06 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/19 07:46:42 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 08:46:27 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ int main(void)
     Data data;
     data.value = 42;
     
-    Serializer::serialize(&data);
-    std::cout << &data << std::endl;
-    Serializer::deserialize();
-    std::cout <<  << std::endl;
+    Data *originalPtr = &data;
+    uintptr_t raw;
+    Data *autrePtr;
+    
+    raw = Serializer::serialize(originalPtr);
+    std::cout << originalPtr << std::endl;
+    std::cout << raw << std::endl;
+    
+    autrePtr = Serializer::deserialize(raw);
+    std::cout << autrePtr << std::endl;
+    std::cout << raw << std::endl;
     
     return 0;
 }

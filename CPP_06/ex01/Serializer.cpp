@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 07:09:10 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/19 07:29:35 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 08:49:49 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,14 +36,14 @@ Serializer::~Serializer()
     std::cout << "Serializer destructor" << std::endl;
 }
 
-static uintptr_t serialize(Data* ptr)
+uintptr_t Serializer::serialize(Data* ptr)
 {
     return (reinterpret_cast<uintptr_t>(ptr));
 }
 
-static uintptr_t deserialize(uintptr_t raw)
+Data* Serializer::deserialize(uintptr_t raw)
 {
-    return (reinterpret_cast<uintptr_t>(raw));
+    return (reinterpret_cast<Data*>(raw));
 }
 
 
