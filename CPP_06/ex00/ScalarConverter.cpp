@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/16 17:48:38 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/18 16:17:36 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:21:56 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,7 +199,7 @@ void convertFromFloat(const std::string& str)
     else
         printChar(static_cast<char>(f));
 
-    if (f < INT_MIN || f > INT_MAX)
+    if (f < static_cast<float>(INT_MIN) || f > static_cast<float>(INT_MAX))
         printInt(0, false);
     else
         printInt(static_cast<int>(f));
