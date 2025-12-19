@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 09:28:00 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/19 10:27:32 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 10:37:17 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,23 @@ void identify(Base* p)
 
 void identify(Base& p)
 {
-    Base *ptr = &p;
-
-    if (dynamic_cast<A*>(ptr))
+    try
     {
+        (void)dynamic_cast<A&>(p);
         std::cout << "A" << std::endl;
         return;
     }
-    else if (dynamic_cast<B*>(ptr))
+    catch (std::exception& e)
+    {}
+    
+    try
     {
+        (void)dynamic_cast<B&>(p);
         std::cout << "B" << std::endl;
         return;
     }
-    else
-    {
-        std::cout << "C" << std::endl;
-        return;
-    }
+    catch (std::exception& e)
+    {}
+    
+    std::cout << "C" << std::endl;
 }
