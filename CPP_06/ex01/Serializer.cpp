@@ -6,11 +6,36 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/19 07:09:10 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/19 08:49:49 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/19 11:12:17 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Serializer.hpp"
+
+//uintptr = unsigned int pointeur : C'est un type assez grand pour
+// contenir un pointeur. Il garantit de stocker l'adresse de
+// l'objet sans perte de donnees.
+
+//reinterpret_cast sert à réinterpréter les bits d’un objet comme 
+//un autre type, sans changer les bits eux-mêmes.
+
+// +------------+                  +----------------+
+// |  Data* ptr | --serialize-->   | uintptr_t raw  |
+// | 0x7FF1234  |                  | 0x7FF1234      |
+// +------------+                  +----------------+
+//        ^                                 |
+//        |                                 v
+//        +---deserialize-------------------+
+//        |                                 |
+//        |                                 |
+//        v                                 v
+// +------------+                  +----------------+
+// |  Data* ptr |                  | uintptr_t raw  |
+// | 0x7FF1234  |                  | 0x7FF1234      |
+// +------------+                  +----------------+
+
+// serialize(ptr)   : reinterpret_cast<uintptr_t>(ptr)
+// deserialize(raw) : reinterpret_cast<Data*>(raw)
 
 
 Serializer::Serializer()
