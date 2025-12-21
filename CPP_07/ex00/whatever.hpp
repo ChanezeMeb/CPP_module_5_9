@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 14:25:55 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/20 14:36:33 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/21 21:15:59 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ T max(T x, T y)
 template <typename T>
 void swap(T &a, T &b)
 {
-    T temp;
-    temp = a;
+    T temp = a;
     a = b;
     b = temp;
 }

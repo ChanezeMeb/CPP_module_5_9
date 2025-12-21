@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/20 14:40:53 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/20 15:34:41 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/21 20:57:43 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 
 #include <iostream>
 
-template <typename T>
-void iter(T *array, const size_t len, void (*f)(T&))
+template <typename T, typename F>
+void iter(T *array, const size_t len, F f)
 {
-    for (size_t i = 0, i < len, i++)
+    if (!array || len == 0)
+        return;
+    for (size_t i = 0; i < len; i++)
         f(array[i]);
 }
 
