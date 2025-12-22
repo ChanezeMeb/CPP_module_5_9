@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 07:20:23 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/22 08:54:23 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/22 09:02:18 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ Array<T>::~Array()
 template <typename T>
 T &Array<T>::operator[](unsigned int index)
 {
-    
+    if (this->_n > index)
+		throw 
 }
 
 template <typename T>
@@ -59,5 +60,5 @@ const T &Array<T>::operator[](unsigned int index) const
 template <typename T>
 unsigned int Array<T>::size() const
 {
-    
+    return (this->_n);
 }
