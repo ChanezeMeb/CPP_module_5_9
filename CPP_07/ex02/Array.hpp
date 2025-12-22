@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 07:20:19 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/22 08:54:13 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/22 13:17:01 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 #define ARRAY_HPP
 
 #include <iostream>
+#include <ctime>
+#include <cstdlib>
 
 template <typename T>
 
@@ -38,6 +40,6 @@ class Array
         unsigned int size() const;
 };
 
-#include <Array.tpp>
+#include "Array.tpp"
 
-#endif ARRAY_HPP
+#endif
