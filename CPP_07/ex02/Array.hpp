@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/22 07:20:19 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/22 07:42:54 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/22 08:54:13 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ class Array
         //d'acceder aux elements comme un tableau natif
         //Exemple : arr[2] = 42; int x = arr[2]. Il retourne
         //une reference T& pour permettre lecture et ecriture directement.
-        T &operator[](unsigned int n); //pour modifier non const
-        const T &operator[](unsigned int n) const; //pour lire const
+        T &operator[](unsigned int index); //pour modifier non const
+        const T &operator[](unsigned int index) const; //pour lire const
         unsigned int size() const;
 };
 
