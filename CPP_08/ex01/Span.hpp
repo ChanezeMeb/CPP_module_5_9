@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:02:55 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/29 16:40:32 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/29 23:09:40 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,12 @@ class Span
         unsigned int longestSpan();
         unsigned int size() const;
 };
+
+template <typename Iterator>
+void Span::addNumber(Iterator first, Iterator last)
+{
+    for (Iterator it = first; it != last; ++it)
+        addNumber(*it);
+}
 
 #endif
