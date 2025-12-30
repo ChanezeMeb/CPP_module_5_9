@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 10:10:17 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/29 11:46:41 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 12:42:22 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #define EASYFIND_HPP
 
 #include <algorithm>
+
+//Le but de l'exercice est de faire un template generique qui va chercher
+//un int dans tous les conteneurs STL (vector, list etc...)
 
 template <typename T>
 typename T::iterator easyfind(T& container, int n);
