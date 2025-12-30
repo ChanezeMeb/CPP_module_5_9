@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MutanStack.tpp                                     :+:      :+:    :+:   */
+/*   MutantStack.tpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,16 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MutanStack.hpp"
+#include "MutantStack.hpp"
 
 template <typename T>
-typename MutanStack<T>::iterator MutanStack<T>::begin()
+typename MutantStack<T>::iterator MutantStack<T>::begin()
 {
     return this->c.begin();
 }
 
 template <typename T>
-typename MutanStack<T>::iterator MutanStack<T>::end()
+typename MutantStack<T>::iterator MutantStack<T>::end()
 {
     return this->c.end();
 }

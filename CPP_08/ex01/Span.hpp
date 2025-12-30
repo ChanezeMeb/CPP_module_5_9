@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:02:55 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/29 23:09:40 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:35:22 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,13 @@ class Span
         unsigned int size() const;
 };
 
+//distance calcule le nombre d'elements entre deux iterateurs
 template <typename Iterator>
 void Span::addNumber(Iterator first, Iterator last)
 {
+	size_t count = std::distance(first, last);
+	if (_data.size() + count > _maxSize)
+		throw std::exception();
     for (Iterator it = first; it != last; ++it)
         addNumber(*it);
 }

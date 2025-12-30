@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:02:49 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/29 23:07:59 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:24:42 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int main()
     
     std::cout << "shortestSpan : " << sp_big.shortestSpan() << std::endl;
     std::cout << "longestSpan  : " << sp_big.longestSpan() << std::endl;
-    std::cout << "Temps execution : OK pour 10k !" << std::endl;
 
     return 0;
 }

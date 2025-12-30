@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 16:02:52 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 12:47:54 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:28:38 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ void Span::addNumber(int nb)
     if (_data.size() >= _maxSize)
         throw std::exception();
     _data.push_back(nb);
-}
-
-template <typename Iterator>
-void Span::addNumber(Iterator first, Iterator last)
-{
-    for (Iterator it = first; it != last; ++it)
-        addNumber(*it);
 }
 
 unsigned int Span::shortestSpan()

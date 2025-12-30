@@ -1,4 +1,4 @@
-NAME = MutanStack
+NAME = MutantStack
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98

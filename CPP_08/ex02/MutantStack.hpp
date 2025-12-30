@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   MutanStack.hpp                                     :+:      :+:    :+:   */
+/*   MutantStack.hpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 23:46:22 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 11:52:36 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:25:18 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MUTANSTACK_HPP
-#define MUTANSTACK_HPP
+#ifndef MutantStack_HPP
+#define MutantStack_HPP
 
 #include <iostream>
 #include <stack>
@@ -22,7 +22,7 @@
 //de la classe stack mais qui peut avoir un iterator.
 
 template <typename T>
-class MutanStack : public std::stack<T>
+class MutantStack : public std::stack<T>
 {
     public :
         //Le main oblige le typedef. Stack est un template avec T et container (deque)
@@ -35,6 +35,6 @@ class MutanStack : public std::stack<T>
         
 };
 
-#include "MutanStack.tpp"
+#include "MutantStack.tpp"
 
 #endif

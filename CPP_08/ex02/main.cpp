@@ -6,15 +6,15 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 23:46:19 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 11:46:55 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 13:27:05 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "MutanStack.hpp"
+#include "MutantStack.hpp"
 
 int main()
 {
-    MutanStack<int> mstack;
+    MutantStack<int> mstack;
     
     mstack.push(5);
     mstack.push(17);
@@ -31,8 +31,8 @@ int main()
     //[...]
     mstack.push(0);
     
-    MutanStack<int>::iterator it = mstack.begin();
-    MutanStack<int>::iterator ite = mstack.end();
+    MutantStack<int>::iterator it = mstack.begin();
+    MutantStack<int>::iterator ite = mstack.end();
     
     ++it;
     --it;
