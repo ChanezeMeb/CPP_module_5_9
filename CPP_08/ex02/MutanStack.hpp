@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 23:46:22 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 11:04:38 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 11:52:36 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ class MutanStack : public std::stack<T>
         
         iterator begin();
         iterator end();
+        
+        
 };
 
 #include "MutanStack.tpp"
