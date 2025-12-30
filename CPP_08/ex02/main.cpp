@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 23:46:19 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 00:00:45 by chamebar         ###   ########.fr       */
+/*   Updated: 2025/12/30 10:58:46 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main()
 {
-    MutantStack<int> mstack;
+    MutanStack<int> mstack;
     
     mstack.push(5);
     mstack.push(17);
@@ -31,8 +31,8 @@ int main()
     //[...]
     mstack.push(0);
     
-    MutantStack<int>::iterator it = mstack.begin();
-    MutantStack<int>::iterator ite = mstack.end();
+    MutanStack<int>::iterator it = mstack.begin();
+    MutanStack<int>::iterator ite = mstack.end();
     
     ++it;
     --it;
