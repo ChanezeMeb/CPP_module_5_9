@@ -46,18 +46,4 @@
 // Polish verification date si pas trouve (upper bound)
 // Tests
 
-//Voici le flux 
 
-// main()
-// └── BitcoinExchange("data.csv")  // ctor public
-//     └── load_csv("data.csv")     // privé : remplit _db map
-
-// └── btc.process("input.txt")     // public : traite TOUT fichier
-//     ├── boucle getline(ligne) {
-//     │   ├── parse ligne → date|qty  // istringstream privé
-//     │   ├── validate_date(date)     // static public/util
-//     │   ├── validate_qty(qty)       // static public/util
-//     │   ├── get_closest_rate(date)  // privé : upper_bound → prix
-//     │   └── qty * rate → cout       // format sujet
-//     │   }
-//     └── erreurs "bad input"/"too large"
