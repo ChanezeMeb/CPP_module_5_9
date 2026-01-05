@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:47:10 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/05 18:38:12 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/05 18:39:55 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,13 @@ double BitcoinExchange::get_closest_rate(const std::string& date)
 
 bool validate_date(const std::string& date)
 {
-
+	//date validate
+	//annee bissextile
 }
 
 bool validate_qty(double qty)
 {
-
+	//nombre entier entre 0 1000 
 }
 
 void parse_line(const std::string& line, std::string& date_out, double& qty_out)
