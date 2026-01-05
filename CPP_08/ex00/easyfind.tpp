@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/29 11:42:49 by chamebar          #+#    #+#             */
-/*   Updated: 2025/12/30 12:46:43 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/05 18:33:52 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ typename T::iterator easyfind(T& container, int n)
 
 //find algo qui cherche n entre begin et end
 
-// template <typename T>
-// typename T::iterator easyfind(T& container, int n)
-// {
-//     typename T::iterator it = std::find(container.begin(), container.end(), n);
-//         if (it == container.end())
-//             throw std::exception();
-//     return (it);
-// }
+template <typename T>
+typename T::iterator easyfind(T& container, int n)
+{
+    typename T::iterator it = std::find(container.begin(), container.end(), n);
+        if (it == container.end())
+            throw std::exception();
+    return (it);
+}
