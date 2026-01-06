@@ -6,13 +6,14 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:47:10 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/05 18:39:55 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/06 17:54:04 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <sstream>
 #include <fstream>
+#include <map>
 
 
 // Chaque ligne doit avoir un format date | bitcoin
@@ -94,6 +95,8 @@ BitcoinExchange::~BitcoinExchange() {}
 void BitcoinExchange::load_csv(const std::string& filename)
 {
 	std::ifstream file(filename);
+	if (!file.is_open())
+		throw std::runtime_error("Error : Could not load csv.");
 	std::string line;
 	
 	std::getline(file, line);
@@ -113,26 +116,55 @@ void BitcoinExchange::load_csv(const std::string& filename)
 
 double BitcoinExchange::get_closest_rate(const std::string& date)
 {
-
+	std::map<std::string, double>::iterator it = _db.upper_bound(date);
+	
 } //prix retourne
 
 bool validate_date(const std::string& date)
 {
+	//faire un tableau avec 12 et tous les jours les
+	//mettre dedans 31 28 30 etc...
 	//date validate
 	//annee bissextile
 }
 
 bool validate_qty(double qty)
 {
-	//nombre entier entre 0 1000 
+	if (qty >= 0 && qty <= 1000)
+		return true;
+	return false;
 }
 
 void parse_line(const std::string& line, std::string& date_out, double& qty_out)
 {
-
+		std::istringstream iss(line);
+		std::getline(iss, date_out, '|');
+		iss >> qty_out;
 }
 
 void process(const std::string& filename)
 {
-
+	std::ifstream file(filename);
+	std::string line;
+	
+	std::getline(file, line);
+	while(std::getline(file, line))
+	{
+		std::string date;
+		double qty;
+		double price;
+		parse_line(line, date, qty);
+		if (!validate_date(date))
+		{
+			std::cerr << "Error : invalid date" << std::endl;
+			continue;
+		}
+		if (!validate_qty(qty))
+		{
+			std::cerr << "Error : Bad quantity" << std::endl;
+			continue;
+		}
+		price = get_closest_rate(date); 
+		std::cout << date << " => " << qty << " = " << qty * price << std::endl;
+	}
 }
