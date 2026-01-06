@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:47:10 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/06 17:54:04 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/06 19:19:05 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,23 @@ void BitcoinExchange::load_csv(const std::string& filename)
 double BitcoinExchange::get_closest_rate(const std::string& date)
 {
 	std::map<std::string, double>::iterator it = _db.upper_bound(date);
-	
+	if (it == _db.begin())
+		throw std::runtime_error("Error : no rate before date");
+	--it;
+	return it->second;
 } //prix retourne
 
 bool validate_date(const std::string& date)
 {
-	//faire un tableau avec 12 et tous les jours les
-	//mettre dedans 31 28 30 etc...
-	//date validate
-	//annee bissextile
+	//1) verifier le format (size = 10)
+	//2) verifier date[4] et date [7] == -
+	//3) diviser en year month day
+	//4) verifier year > 2009
+	// tableau de max_day_of_month
+	//fonction qui verifie si bissextile
+	//month compris entre 0 et 12
+	// day > 1
+	// day doit etre inferieur ou egal a max_day_of_months
 }
 
 bool validate_qty(double qty)
@@ -156,12 +164,12 @@ void process(const std::string& filename)
 		parse_line(line, date, qty);
 		if (!validate_date(date))
 		{
-			std::cerr << "Error : invalid date" << std::endl;
+			std::cerr << "Error : bad input => " << date << std::endl;
 			continue;
 		}
 		if (!validate_qty(qty))
 		{
-			std::cerr << "Error : Bad quantity" << std::endl;
+			std::cerr << "Error : bad quantity" << std::endl;
 			continue;
 		}
 		price = get_closest_rate(date); 
