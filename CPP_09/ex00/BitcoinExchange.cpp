@@ -6,64 +6,14 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/05 14:47:10 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/06 19:19:05 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/07 12:18:22 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 #include <sstream>
 #include <fstream>
-#include <map>
-
-
-// Chaque ligne doit avoir un format date | bitcoin
-// La date doit etre annee mois jour
-
-//Parsing de la date a faire
-
-//que des nombres verifier que c'est une date possible + annee bisextile
-
-//Parsing des donnees float ou int entre 0 et 1000
-
-// Il faut utiliser un container : map container ?
-
-//La sortie devra etre le resultat de la multiplication entre 
-//la valeur du bitcoin dans mon fichier * la valeur du bitcoin dans la database.
-// Si la date recherchee n'existe pas dans la database je dois 
-//chercher la date la plus proche (inferieure).
-
-//Lecture du fichier ligne par ligne avec getline
-
-//deux fichiers : .csv va etre stocke dans une map puis 
-//dans le programme on lit chaque ligne, calcule et affiche.
-
-//std::istringstream est un outil pour parser (découper)
-//une chaîne de caractères comme si c'était du clavier (cin), mais sur une string fixe.
-
-//getline peut lire jusqu'a , ou |
-
-//Etape 1 :
-
-//Parsing data.csv => Remplir map avec les donnees de .csv
-// Utiliser istringstream / getline jusqu'a , et stocker dans 
-// string / double
-
-//Etape 2 :
-
-//Parsing input.txt => Utiliser istringstream / getline jusqu'a |
-//Faire la multiplication date => qty * prix = total
-
-// Etape 3 :
-
-// Validation dates/qty + erreurs
-
-// Etape 4 :
-
-// Polish verification date si pas trouve (upper bound)
-// Tests
-
-
-//===========================================================================================
+#include <string>
 
 // Forme canonique
 
@@ -92,9 +42,10 @@ BitcoinExchange::~BitcoinExchange() {}
 
 //std::istringstream = un flux d’entrée, mais au lieu de lire dans un fichier
 // ou depuis le clavier, il lit dans une string.
+
 void BitcoinExchange::load_csv(const std::string& filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
 	if (!file.is_open())
 		throw std::runtime_error("Error : Could not load csv.");
 	std::string line;
@@ -114,6 +65,8 @@ void BitcoinExchange::load_csv(const std::string& filename)
 	}
 }
 
+//Fonction permettant de recuperer la date precedente si une
+//date provenant d'input.txt n'existe pas dans data.csv
 double BitcoinExchange::get_closest_rate(const std::string& date)
 {
 	std::map<std::string, double>::iterator it = _db.upper_bound(date);
@@ -123,36 +76,74 @@ double BitcoinExchange::get_closest_rate(const std::string& date)
 	return it->second;
 } //prix retourne
 
-bool validate_date(const std::string& date)
+//Verifie si une annee est bissextile
+static bool leap_year(int year)
 {
-	//1) verifier le format (size = 10)
-	//2) verifier date[4] et date [7] == -
-	//3) diviser en year month day
-	//4) verifier year > 2009
-	// tableau de max_day_of_month
-	//fonction qui verifie si bissextile
-	//month compris entre 0 et 12
-	// day > 1
-	// day doit etre inferieur ou egal a max_day_of_months
-}
-
-bool validate_qty(double qty)
-{
-	if (qty >= 0 && qty <= 1000)
+	if (year % 400 == 0)
+		return true;
+	if (year % 100 == 0)
+		return false;
+	if (year % 4 == 0)
 		return true;
 	return false;
 }
 
+bool validate_date(const std::string& date)
+{
+	if (date.size() != 10)
+		return false;
+	if (date[4] != '-' || date[7] != '-')
+		return false;
+	int year, month, day;
+	char dash1, dash2;
+	std::istringstream iss(date);
+	if (!(iss >> year >> dash1 >> month >> dash2 >> day))
+		return false;
+	int day_in_month[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	if (leap_year(year))
+	{
+		day_in_month[2] = 29;
+	}
+	if (year < 2009)
+		return false;
+	if (month < 1 || month > 12)
+		return false;
+	if (day < 1 || day > day_in_month[month])
+		return false;
+	return true;
+}
+
+// trim la date pour bien avoir un format 
+// "2022-10-20" et non " 2022-10-20 " car sinon 
+//validate date ne fonctionne pas (mauvaise longueur)
+std::string trim(const std::string& date)
+{
+	std::string newDate;
+	size_t start, end;
+	start = date.find_first_not_of(" \t");
+	end = date.find_last_not_of(" \t");
+	if (start == std::string::npos)
+		return "";
+	newDate = date.substr(start, end - start + 1);
+	return newDate;
+}
+
+//Recupere la date ainsi que les quantite tout en trimant la date
 void parse_line(const std::string& line, std::string& date_out, double& qty_out)
 {
 		std::istringstream iss(line);
 		std::getline(iss, date_out, '|');
+		date_out = trim(date_out);
 		iss >> qty_out;
 }
 
-void process(const std::string& filename)
+//Permet de lire le fichier input
+//De proceder au parsing et affiche le resultat
+void BitcoinExchange::process(const std::string& filename)
 {
-	std::ifstream file(filename);
+	std::ifstream file(filename.c_str());
+	if (!file.is_open())
+		throw std::runtime_error("Error : Could not open file.");
 	std::string line;
 	
 	std::getline(file, line);
@@ -167,9 +158,14 @@ void process(const std::string& filename)
 			std::cerr << "Error : bad input => " << date << std::endl;
 			continue;
 		}
-		if (!validate_qty(qty))
+		if (qty < 0)
 		{
-			std::cerr << "Error : bad quantity" << std::endl;
+			std::cerr << "Error : not a positive number." << std::endl;
+			continue;
+		}
+		if (qty > 1000)
+		{
+			std::cerr << "Error : too large number." << std::endl;
 			continue;
 		}
 		price = get_closest_rate(date); 
