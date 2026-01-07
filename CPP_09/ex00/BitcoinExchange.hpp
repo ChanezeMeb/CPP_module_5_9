@@ -24,7 +24,3 @@ bool validate_date(const std::string& date);
 void parse_line(const std::string& line, std::string& date_out, double& qty_out);
 
 #endif
-
-//ex01 diviser par 0 interdit
-
-// Pour l'exercice 02 echelle de jacobstall + merge insertion sort
