@@ -6,12 +6,29 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 12:21:55 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/08 11:01:03 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:41:31 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
 #include <sstream>
+
+//Forme canonique
+
+RPN::RPN() {}
+
+RPN::RPN(const RPN &other) : _stack(other._stack) {}
+
+RPN &RPN::operator=(const RPN &other)
+{
+    if(this != &other)
+    {
+        _stack = other._stack;
+    }
+    return *this;
+}
+
+RPN::~RPN() {}
 
  //Je lis ma string token par token en utilisant istringsream ?
  //Puis token[0] doit etre == 1 et doit etre un digit ou + - / * ?
@@ -29,15 +46,24 @@ void RPN::calculate(const std::string& str)
 	while (iss >> token)
 	{
 		if (token.size() != 1)
+		{
 			std::cerr << "Error : digit must be < 10" << std::endl;
+			return;
+		}
 		if (!(std::isdigit(token[0]) || token[0] == '+' || token[0] == '-' ||token[0] == '*' || token[0] == '/'))
+		{
 			std::cerr << "Error : token is not + - * / or digit" << std::endl;
+			return;
+		}	
 		if (std::isdigit(token[0]))
 		{
-			_stack.push(token[0] + '0');
+			_stack.push(token[0] - '0');
 		}
 		if ((token[0] == '+' || token[0] == '-' ||token[0] == '*' || token[0] == '/') && _stack.size() < 2)
+		{
 			std::cerr << "Error : Miss operande" << std::endl;
+			return;
+		}
 		if (token[0] == '+' || token[0] == '-' ||token[0] == '*' || token[0] == '/')
 		{
 			int b = _stack.top(); //assigne le top a int b
@@ -53,12 +79,18 @@ void RPN::calculate(const std::string& str)
 			else if (token[0] == '/')
 			{
 				if (b == 0)
+				{
 					std::cerr << "Division by zero is impossible." << std::endl;
+					return;
+				}
 				_stack.push(a / b);
 			}			
 		}			
 	}
 	if (_stack.size() != 1)
+	{
 		std::cerr << "Operators are missing" << std::endl;
+		return;
+	}
 	std::cout << _stack.top() << std::endl;
 }

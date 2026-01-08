@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 12:21:57 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/07 13:03:56 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/08 12:29:51 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,10 @@ class RPN
 		std::stack<int, std::list<int> > _stack;
 	public :
 		void calculate(const std::string& str);
+		RPN();
+		RPN(const RPN& other);
+		RPN &operator=(const RPN& other);
+		~RPN();
 };
 
 #endif
