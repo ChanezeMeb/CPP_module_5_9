@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:43 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/12 17:25:04 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/12 17:37:18 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ class PmergeMe
         int _size; //taille du tableau
         std::vector<std::pair<int, int> > makePairs(); //fonction pour faire des pairs
         void mergeSort(std::vector<std::pair<int, int> > &pairs);
-        void merge(std::vector<std::pair<int, int> > &pairs); //merge pour left et right ??
-        //merge sort pour left et right ??
+        void separateChain(std::vector<std::pair<int, int> > &pair, std::vector<std::pair<int, int> > &mainChain, std::vector<std::pair<int, int> > &pending);
         std::vector<int> jacobSthal(int n); //fonction qui calcule l'indice de jacobsthal
         std::vector<int> insertionOrder(int n);
         void parsing(char**argv); //fonction parsing
@@ -36,6 +35,48 @@ class PmergeMe
         void timeVector();
         void timeDeque();
 };
+
+// class PmergeMe
+// {
+// private:
+//     std::vector<int> _vector;
+//     std::deque<int> _deque;
+//     int _odd;
+//     int _size;
+    
+//     // TEMPLATES pour éviter duplication
+//     template <typename Container>
+//     std::vector<std::pair<int, int>> makePairs(Container& cont);
+    
+//     template <typename T>
+//     void mergeSort(std::vector<std::pair<T, T>>& pairs);
+    
+//     template <typename T>
+//     void merge(std::vector<std::pair<T, T>>& pairs,
+//                std::vector<std::pair<T, T>>& left,
+//                std::vector<std::pair<T, T>>& right);
+    
+//     template <typename Container>
+//     void separateChains(std::vector<std::pair<int, int>>& pairs,
+//                         Container& main,
+//                         Container& pend);
+    
+//     std::vector<int> generateJacobsthal(int n);
+//     std::vector<int> generateInsertionOrder(int n);
+    
+//     template <typename Container>
+//     void insertPending(Container& main,
+//                        Container& pend,
+//                        std::vector<int>& order);
+    
+//     template <typename Container>
+//     void fordJohnsonRecursive(Container& container);
+
+// public:
+//     int parsing(int argc, char **argv);
+//     void process();
+//     void processDeq();
+// };
 
 #endif
 
