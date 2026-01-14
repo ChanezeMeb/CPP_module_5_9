@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:43 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/14 10:38:06 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/14 15:04:01 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 #include <deque>
 #include <iostream>
 #include <string>
+#include <exception>
+#include <stdexcept>
+#include <climits>
 
 class PmergeMe
 {
@@ -54,8 +57,24 @@ class PmergeMe
         PmergeMe(const PmergeMe &other);
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
+
+        class ErrParse : public std::exception
+        {
+            public :
+                virtual const char *what() const throw()
+                {
+                    return ("Argument not valid");
+                };
+        };
+
+        class ErrDup : public std::exception
+        {
+            public :
+                virtual const char *what() const throw()
+                {
+                    return ("Argument duplicate");
+                };
+        };
 };
 
 #endif
-
-//j'ai deja _odd pour l'element impair. Pourquoi avoir besoin de mergeVec alors qu'on a deja mergeSortVec ? Je peux appeler en recursif non ? pourrais tu  me reexpliquer la suite de Jacobsthal, insertPendVec et le binary sreach ? Pourquoi avoir besoin de argc ? Si dans le main je mets if argc < 2 error je n'en ai plus besoin par la suite.
