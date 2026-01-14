@@ -2,8 +2,7 @@ NAME = PmergeMe
 RM = rm -rf
 CXX = c++
 CXXFLAGS = -Wall -Werror -Wextra -std=c++98
-SRC = main.cpp \
-	  PmergeMe.cpp
+SRC = PmergeMe.cpp
 
 OBJ = $(SRC:.cpp=.o)
 

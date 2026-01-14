@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:43 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/14 15:04:01 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:23:05 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@
 #include <exception>
 #include <stdexcept>
 #include <climits>
+#include <cstdlib>
 
 class PmergeMe
 {
     private :
+        int _odd; //Element qui reste en cas de tableau impair
         std::vector<int> _vector;
         std::deque<int> _deque;
-        int _odd; //Element qui reste en cas de tableau impair
-
         //Ford-Johnson VECTOR
         std::vector<std::pair<int, int> > makePairsVec(); //fonction pour faire des pairs
         void mergeSortVec(std::vector<std::pair<int, int> > &pairs);
@@ -43,7 +43,7 @@ class PmergeMe
         std::vector<int> insertionOrder(int n);
         void parsing(char**argv); //fonction parsing
     public :
-        PmergeMe(char** argv);
+        
         void processVec();
         void processDeq();
         void displayBefore(); 
@@ -57,7 +57,9 @@ class PmergeMe
         PmergeMe(const PmergeMe &other);
         PmergeMe &operator=(const PmergeMe &other);
         ~PmergeMe();
-
+        
+        //Constructeur avec variable
+        PmergeMe(char** argv);
         class ErrParse : public std::exception
         {
             public :
@@ -75,6 +77,16 @@ class PmergeMe
                     return ("Argument duplicate");
                 };
         };
+
+        class ArgMissing : public std::exception
+        {
+            public :
+                virtual const char *what() const throw()
+                {
+                    return ("Usage : /PmergeMe arguments");
+                };
+        };
 };
+
 
 #endif

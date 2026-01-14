@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/14 15:04:42 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/14 16:40:41 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,13 +64,19 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 {
     if (this != &other)
     {
+        this->_odd = other._odd;
         this->_vector = other._vector;
         this->_deque = other._deque;
-        this->_odd = other._odd;
     }
+    return *this;
 }
 
 PmergeMe::~PmergeMe() {}
+
+PmergeMe::PmergeMe(char **argv) : _odd(-1)
+{
+    parsing(argv);
+}
 
 //Parsing
 void PmergeMe::parsing(char**argv)
@@ -78,27 +84,41 @@ void PmergeMe::parsing(char**argv)
     for (int i = 1; argv[i]; i++)
     {
         std::string str = argv[i];
-        for (int j = 0; j < str.size(); j++)
+        for (size_t j = 0; j < str.size(); j++)
         {
             if(!isdigit(str[j]))
-            {
                 throw PmergeMe::ErrParse();
-            }
         }
         long nb = std::atol(str.c_str());
-        for (int k = 0; k < str.size(); k++)
+            
+        if (nb < 0 || nb > INT_MAX)
+            throw PmergeMe::ErrParse();
+            
+        for (size_t k = 0; k < _vector.size(); k++)
         {
-            if (nb < 0 || nb > INT_MAX)
-            {
-                throw PmergeMe::ErrParse();
-            }
-        }
-
-        for (size_t l = 0; l < _vector.size(); l++)
-        {
-            if (_vector[l] = nb)
+            if (_vector[k] == nb)
                 throw PmergeMe::ErrDup();
-        }
+        }    
+        _vector.push_back(nb);
+        _deque.push_back(nb);
+        
     }
+}
+
+int main(int argc, char **argv)
+{
+    try
+    {
+        if (argc < 2)
+        {
+            throw PmergeMe::ArgMissing();
+        }
+        PmergeMe test(argv);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << '\n';
+    }
+    return 0;
 }
 
