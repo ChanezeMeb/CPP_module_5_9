@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/14 16:40:41 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:54:34 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,40 @@ void PmergeMe::parsing(char**argv)
         
     }
 }
+
+std::vector<int> jacobSthal(int n); //fonction qui calcule l'indice de jacobsthal
+std::vector<int> insertionOrder(int n);
+void displayBefore(); 
+
+//==============================================VECTOR=====================================================
+
+std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
+{
+    std::vector<std::pair<int, int> > pair;
+    for (size_t i = 0; i + 1 < _vector.size() / 2; i += 2)
+    {
+        int a = _vector[i];
+        int b = _vector[i+1];
+        if (a > b)
+    }
+} //fonction pour faire des pairs
+void mergeSortVec(std::vector<std::pair<int, int> > &pairs);
+void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend);
+void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend);
+void displayAfterVec();    
+void timeVector();
+void processVec();
+
+
+//==============================================VECTOR=====================================================
+std::deque<std::pair<int, int> > makePairsDeq(); //fonction pour faire des pairs
+void mergeSortDeq(std::deque<std::pair<int, int> > &pairs);
+void separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend);
+void insertPendDeq(std::deque<int> &mainChain, std::deque<int> &pend);
+void displayAfterDeq();
+void timeDeque();
+void processDeq();
+        
 
 int main(int argc, char **argv)
 {
