@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/15 22:54:34 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/15 22:55:39 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,9 @@ std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
         int a = _vector[i];
         int b = _vector[i+1];
         if (a > b)
+        {
+            
+        }
     }
 } //fonction pour faire des pairs
 void mergeSortVec(std::vector<std::pair<int, int> > &pairs);
