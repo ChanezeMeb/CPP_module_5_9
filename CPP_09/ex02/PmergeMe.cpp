@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/15 22:55:39 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/17 17:40:57 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,18 +113,56 @@ void displayBefore();
 
 std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
 {
-    std::vector<std::pair<int, int> > pair;
-    for (size_t i = 0; i + 1 < _vector.size() / 2; i += 2)
+    std::vector<std::pair<int, int> > pairs;
+    pairs.reserve(_vector.size() / 2);
+    for (size_t i = 0; i + 1 < _vector.size(); i += 2)
     {
         int a = _vector[i];
         int b = _vector[i+1];
         if (a > b)
-        {
-            
-        }
+            pairs.push_back(std::make_pair(a, b));
+        else
+            pairs.push_back(std::make_pair(b, a));
     }
+    
+    if (_vector.size() % 2 != 0)
+        _odd = _vector.back();
+    return pairs;
 } //fonction pour faire des pairs
-void mergeSortVec(std::vector<std::pair<int, int> > &pairs);
+
+void mergeSortVec(std::vector<std::pair<int, int> > &pairs)
+{
+    if (pairs.size() <= 1)
+        return;
+        
+    size_t mid = pairs.size() / 2;
+    std::vector<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
+    std::vector<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
+
+    mergeSortVec(left);
+    mergeSortVec(right);
+
+    //Fusion
+    size_t i = 0, j = 0, k = 0;
+
+    // i avance dans left j dans right et k dans pairs
+    while (i < left.size() && j < right.size())
+    {
+        if (left[i].first <= right[j].first)
+            pairs[k++] = left[i++];
+        else
+            pairs[k++] = right[j++];
+    }
+
+    while (i < left.size())
+        pairs[k++] = left[i++];
+        
+    while (j < right.size())
+        pairs[k++] = right[j++]; 
+     
+}
+
+
 void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend);
 void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend);
 void displayAfterVec();    
