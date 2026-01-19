@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/17 17:40:57 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/19 14:59:29 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,9 +105,58 @@ void PmergeMe::parsing(char**argv)
     }
 }
 
-std::vector<int> jacobSthal(int n); //fonction qui calcule l'indice de jacobsthal
-std::vector<int> insertionOrder(int n);
-void displayBefore(); 
+//fonction qui calcule l'indice de jacobsthal
+//Les indices Jacobsthal indiquent les moments où 
+//une insertion coûte le moins cher en comparaisons
+std::vector<int> jacobSthal(int n)
+{
+    std::vector<int> seq;
+    if (n <= 0)
+        return seq;
+    
+    int a = 0;
+    int b = 1;
+    
+    while(true)
+    {
+        int c = b + 2 * a;
+        if (c > n)
+            break;
+        a = b;
+        b = c;
+    }
+
+    return seq;
+}
+
+//Permet d'avoir l'ordre d'insertion optimal a l'aide de
+//la suite de Jacobsthal
+//Rempli le tableau order
+std::vector<int> insertionOrder(int n)
+{
+    std::vector<int> jacob = jacobSthal(n);
+    std::vector<int> order;
+
+    int prev = 0;
+    for (size_t i = 0; i < jacob.size(); i++)
+    {
+        int j = jacob[i];
+        for (int k = j; k > prev; k--)
+        {
+            order.push_back(k);
+        }
+        prev = j;
+    }
+    for (int k = prev + 1; k <= n; k++)
+        order.push_back(k);
+
+    return order;
+}
+
+void displayBefore()
+{
+    
+}
 
 //==============================================VECTOR=====================================================
 
@@ -130,10 +179,13 @@ std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
     return pairs;
 } //fonction pour faire des pairs
 
+//Fonction qui trie les pairs 
 void mergeSortVec(std::vector<std::pair<int, int> > &pairs)
 {
     if (pairs.size() <= 1)
         return;
+    
+    //utiliser reserve pour eviter la reallocation de la memoire ??    
         
     size_t mid = pairs.size() / 2;
     std::vector<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
@@ -162,15 +214,52 @@ void mergeSortVec(std::vector<std::pair<int, int> > &pairs)
      
 }
 
+void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend)
+{
+    if (pair.empty())
+        return;
+    //reserver l'espace
+    mainChain.reserve(pair.size());
+    pend.reserve(pair.size());
 
-void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend);
-void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend);
+    //Premier element special
+    mainChain.push_back(pair[0].second);
+    mainChain.push_back(pair[0].first);
+    pend.push_back(pair[0].second); 
+
+    //Le plus grand dans mainChain le plus petit dans pend
+    for (size_t i = 1; i < pair.size(); i++)
+    {
+        mainChain.push_back(pair[i].first);
+        pend.push_back(pair[i].second);        
+    }
+}
+
+void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend)
+{
+    if (pend.size() <=  1)
+        return;
+    
+    int n = pend.size();
+    std::vector<int> order = insertionOrder(n);
+    
+    for (size_t i = 1; i < order.size(); i++)
+    {
+        int index = order[i];
+        int value = pend[index - 1]; //conversion 1-based 0-based
+
+        //recupere la position a laquelle je dois inserer value
+        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), value);
+        mainChain.insert(pos, value);
+    }
+}
+
 void displayAfterVec();    
 void timeVector();
 void processVec();
 
 
-//==============================================VECTOR=====================================================
+//==============================================DEQUE=====================================================
 std::deque<std::pair<int, int> > makePairsDeq(); //fonction pour faire des pairs
 void mergeSortDeq(std::deque<std::pair<int, int> > &pairs);
 void separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend);
