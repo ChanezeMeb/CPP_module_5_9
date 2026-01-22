@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/19 14:59:29 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:43:43 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ void PmergeMe::parsing(char**argv)
 //fonction qui calcule l'indice de jacobsthal
 //Les indices Jacobsthal indiquent les moments où 
 //une insertion coûte le moins cher en comparaisons
-std::vector<int> jacobSthal(int n)
+std::vector<int> PmergeMe::jacobSthal(int n)
 {
     std::vector<int> seq;
     if (n <= 0)
@@ -132,7 +132,7 @@ std::vector<int> jacobSthal(int n)
 //Permet d'avoir l'ordre d'insertion optimal a l'aide de
 //la suite de Jacobsthal
 //Rempli le tableau order
-std::vector<int> insertionOrder(int n)
+std::vector<int> PmergeMe::insertionOrder(int n)
 {
     std::vector<int> jacob = jacobSthal(n);
     std::vector<int> order;
@@ -153,9 +153,12 @@ std::vector<int> insertionOrder(int n)
     return order;
 }
 
-void displayBefore()
+void PmergeMe::displayBefore()
 {
-    
+    std::cout << "Before : ";
+    for (size_t i = 0; i < _vector.size(); i++)
+        std::cout << _vector[i] << " ";
+    std::cout << std::endl;
 }
 
 //==============================================VECTOR=====================================================
@@ -180,7 +183,7 @@ std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
 } //fonction pour faire des pairs
 
 //Fonction qui trie les pairs 
-void mergeSortVec(std::vector<std::pair<int, int> > &pairs)
+void PmergeMe::mergeSortVec(std::vector<std::pair<int, int> > &pairs)
 {
     if (pairs.size() <= 1)
         return;
@@ -214,7 +217,7 @@ void mergeSortVec(std::vector<std::pair<int, int> > &pairs)
      
 }
 
-void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend)
+void PmergeMe::separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &mainChain, std::vector<int> &pend)
 {
     if (pair.empty())
         return;
@@ -235,7 +238,7 @@ void separateVec(std::vector<std::pair<int, int> > &pair, std::vector<int> &main
     }
 }
 
-void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend)
+void PmergeMe::insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend)
 {
     if (pend.size() <=  1)
         return;
@@ -252,11 +255,44 @@ void insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend)
         std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), value);
         mainChain.insert(pos, value);
     }
+
+    if (_odd != -1)
+    {
+        std::vector<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), _odd);
+        mainChain.insert(pos, _odd);
+    }
 }
 
-void displayAfterVec();    
-void timeVector();
-void processVec();
+void PmergeMe::processVec()
+{
+    //Affichage avant
+    displayBefore();
+    
+    //Debut du chrono
+    clock_t start = clock();
+    
+    //Algorithme de tri
+    std::vector<std::pair<int, int> > pairs = makePairsVec();
+    mergeSortVec(pairs);
+    
+    std::vector<int> mainChain;
+    std::vector<int> pend;
+    separateVec(pairs, mainChain, pend);
+
+    insertPendVec(mainChain, pend);
+    
+    //Fin du chrono
+    clock_t end = clock();
+    double elapsed = (double)(end - start) / CLOCKS_PER_SEC * 1000000.0;
+
+    std::cout << "After : ";
+    for (size_t i = 0; i < mainChain.size(); i++)
+        std::cout << mainChain[i] << " ";
+    std::cout << std::endl;
+    
+    std::cout << "Time to process a range of " << _vector.size() << " elements with std::vector : " << std::fixed << std::setprecision(5) << elapsed << " us" << std::endl;
+    
+}
 
 
 //==============================================DEQUE=====================================================
@@ -264,8 +300,6 @@ std::deque<std::pair<int, int> > makePairsDeq(); //fonction pour faire des pairs
 void mergeSortDeq(std::deque<std::pair<int, int> > &pairs);
 void separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend);
 void insertPendDeq(std::deque<int> &mainChain, std::deque<int> &pend);
-void displayAfterDeq();
-void timeDeque();
 void processDeq();
         
 
@@ -278,6 +312,7 @@ int main(int argc, char **argv)
             throw PmergeMe::ArgMissing();
         }
         PmergeMe test(argv);
+        test.processVec();
     }
     catch(const std::exception& e)
     {

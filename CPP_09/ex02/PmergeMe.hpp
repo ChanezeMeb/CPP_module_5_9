@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:43 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/14 16:23:05 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/22 12:42:30 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 #include <stdexcept>
 #include <climits>
 #include <cstdlib>
+#include <iomanip>
+#include <ctime>
+#include <algorithm>
 
 class PmergeMe
 {
@@ -47,10 +50,6 @@ class PmergeMe
         void processVec();
         void processDeq();
         void displayBefore(); 
-        void displayAfterVec();
-        void displayAfterDeq();
-        void timeVector();
-        void timeDeque();
 
         //Forme canonique
         PmergeMe();
