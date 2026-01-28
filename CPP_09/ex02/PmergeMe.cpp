@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/28 18:51:19 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:54:58 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,54 +104,6 @@ void PmergeMe::parsing(char**argv)
         
     }
 }
-
-// //fonction qui calcule l'indice de jacobsthal
-// //Les indices Jacobsthal indiquent les moments où 
-// //une insertion coûte le moins cher en comparaisons
-// std::vector<int> PmergeMe::jacobSthalVec(int n)
-// {
-//     std::vector<int> seq;
-//     if (n <= 0)
-//         return seq;
-    
-//     int a = 0;
-//     int b = 1;
-    
-//     while(true)
-//     {
-//         int c = b + 2 * a;
-//         if (c > n)
-//             break;
-//         a = b;
-//         b = c;
-//     }
-
-//     return seq;
-// }
-
-// //Permet d'avoir l'ordre d'insertion optimal a l'aide de
-// //la suite de Jacobsthal
-// //Rempli le tableau order
-// std::vector<int> PmergeMe::insertionOrder(int n)
-// {
-//     std::vector<int> jacob = jacobSthal(n);
-//     std::vector<int> order;
-
-//     int prev = 0;
-//     for (size_t i = 0; i < jacob.size(); i++)
-//     {
-//         int j = jacob[i];
-//         for (int k = j; k > prev; k--)
-//         {
-//             order.push_back(k);
-//         }
-//         prev = j;
-//     }
-//     for (int k = prev + 1; k <= n; k++)
-//         order.push_back(k);
-
-//     return order;
-// }
 
 void PmergeMe::displayBefore()
 {
