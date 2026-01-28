@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:40 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/22 12:43:43 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:51:19 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,10 +105,68 @@ void PmergeMe::parsing(char**argv)
     }
 }
 
+// //fonction qui calcule l'indice de jacobsthal
+// //Les indices Jacobsthal indiquent les moments où 
+// //une insertion coûte le moins cher en comparaisons
+// std::vector<int> PmergeMe::jacobSthalVec(int n)
+// {
+//     std::vector<int> seq;
+//     if (n <= 0)
+//         return seq;
+    
+//     int a = 0;
+//     int b = 1;
+    
+//     while(true)
+//     {
+//         int c = b + 2 * a;
+//         if (c > n)
+//             break;
+//         a = b;
+//         b = c;
+//     }
+
+//     return seq;
+// }
+
+// //Permet d'avoir l'ordre d'insertion optimal a l'aide de
+// //la suite de Jacobsthal
+// //Rempli le tableau order
+// std::vector<int> PmergeMe::insertionOrder(int n)
+// {
+//     std::vector<int> jacob = jacobSthal(n);
+//     std::vector<int> order;
+
+//     int prev = 0;
+//     for (size_t i = 0; i < jacob.size(); i++)
+//     {
+//         int j = jacob[i];
+//         for (int k = j; k > prev; k--)
+//         {
+//             order.push_back(k);
+//         }
+//         prev = j;
+//     }
+//     for (int k = prev + 1; k <= n; k++)
+//         order.push_back(k);
+
+//     return order;
+// }
+
+void PmergeMe::displayBefore()
+{
+    std::cout << "Before : ";
+    for (size_t i = 0; i < _vector.size(); i++)
+        std::cout << _vector[i] << " ";
+    std::cout << std::endl;
+}
+
+//==============================================VECTOR=====================================================
+
 //fonction qui calcule l'indice de jacobsthal
 //Les indices Jacobsthal indiquent les moments où 
 //une insertion coûte le moins cher en comparaisons
-std::vector<int> PmergeMe::jacobSthal(int n)
+std::vector<int> PmergeMe::jacobSthalVec(int n)
 {
     std::vector<int> seq;
     if (n <= 0)
@@ -132,9 +190,9 @@ std::vector<int> PmergeMe::jacobSthal(int n)
 //Permet d'avoir l'ordre d'insertion optimal a l'aide de
 //la suite de Jacobsthal
 //Rempli le tableau order
-std::vector<int> PmergeMe::insertionOrder(int n)
+std::vector<int> PmergeMe::insertionOrderVec(int n)
 {
-    std::vector<int> jacob = jacobSthal(n);
+    std::vector<int> jacob = jacobSthalVec(n);
     std::vector<int> order;
 
     int prev = 0;
@@ -152,16 +210,6 @@ std::vector<int> PmergeMe::insertionOrder(int n)
 
     return order;
 }
-
-void PmergeMe::displayBefore()
-{
-    std::cout << "Before : ";
-    for (size_t i = 0; i < _vector.size(); i++)
-        std::cout << _vector[i] << " ";
-    std::cout << std::endl;
-}
-
-//==============================================VECTOR=====================================================
 
 std::vector<std::pair<int, int> > PmergeMe::makePairsVec()
 {
@@ -240,11 +288,11 @@ void PmergeMe::separateVec(std::vector<std::pair<int, int> > &pair, std::vector<
 
 void PmergeMe::insertPendVec(std::vector<int> &mainChain, std::vector<int> &pend)
 {
-    if (pend.size() <=  1)
+    if (pend.empty())
         return;
     
     int n = pend.size();
-    std::vector<int> order = insertionOrder(n);
+    std::vector<int> order = insertionOrderVec(n);
     
     for (size_t i = 1; i < order.size(); i++)
     {
@@ -296,28 +344,198 @@ void PmergeMe::processVec()
 
 
 //==============================================DEQUE=====================================================
-std::deque<std::pair<int, int> > makePairsDeq(); //fonction pour faire des pairs
-void mergeSortDeq(std::deque<std::pair<int, int> > &pairs);
-void separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend);
-void insertPendDeq(std::deque<int> &mainChain, std::deque<int> &pend);
-void processDeq();
+
+//fonction qui calcule l'indice de jacobsthal
+//Les indices Jacobsthal indiquent les moments où 
+//une insertion coûte le moins cher en comparaisons
+std::deque<int> PmergeMe::jacobSthalDeq(int n)
+{
+    std::deque<int> seq;
+    if (n <= 0)
+        return seq;
+    
+    int a = 0;
+    int b = 1;
+    
+    while(true)
+    {
+        int c = b + 2 * a;
+        if (c > n)
+            break;
+        a = b;
+        b = c;
+    }
+
+    return seq;
+}
+
+//Permet d'avoir l'ordre d'insertion optimal a l'aide de
+//la suite de Jacobsthal
+//Rempli le tableau order
+std::deque<int> PmergeMe::insertionOrderDeq(int n)
+{
+    std::deque<int> jacob = jacobSthalDeq(n);
+    std::deque<int> order;
+
+    int prev = 0;
+    for (size_t i = 0; i < jacob.size(); i++)
+    {
+        int j = jacob[i];
+        for (int k = j; k > prev; k--)
+        {
+            order.push_back(k);
+        }
+        prev = j;
+    }
+    for (int k = prev + 1; k <= n; k++)
+        order.push_back(k);
+
+    return order;
+}
+
+std::deque<std::pair<int, int> > PmergeMe::makePairsDeq()
+{
+    std::deque<std::pair<int, int> > pairs;
+    for (size_t i = 0; i + 1 < _deque.size(); i += 2)
+    {
+        int a = _deque[i];
+        int b = _deque[i+1];
+        if (a > b)
+            pairs.push_back(std::make_pair(a, b));
+        else
+            pairs.push_back(std::make_pair(b, a));
+    }
+    
+    if (_deque.size() % 2 != 0)
+        _odd = _deque.back();
+    return pairs;
+} //fonction pour faire des pairs
+
+//Fonction qui trie les pairs 
+void PmergeMe::mergeSortDeq(std::deque<std::pair<int, int> > &pairs)
+{
+    if (pairs.size() <= 1)
+        return;
+    
+    //utiliser reserve pour eviter la reallocation de la memoire ??    
+        
+    size_t mid = pairs.size() / 2;
+    std::deque<std::pair<int, int> > left(pairs.begin(), pairs.begin() + mid);
+    std::deque<std::pair<int, int> > right(pairs.begin() + mid, pairs.end());
+
+    mergeSortDeq(left);
+    mergeSortDeq(right);
+
+    //Fusion
+    size_t i = 0, j = 0, k = 0;
+
+    // i avance dans left j dans right et k dans pairs
+    while (i < left.size() && j < right.size())
+    {
+        if (left[i].first <= right[j].first)
+            pairs[k++] = left[i++];
+        else
+            pairs[k++] = right[j++];
+    }
+
+    while (i < left.size())
+        pairs[k++] = left[i++];
+        
+    while (j < right.size())
+        pairs[k++] = right[j++]; 
+     
+}
+
+void PmergeMe::separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend)
+{
+    if (pair.empty())
+        return;
+
+    //Premier element special
+    mainChain.push_back(pair[0].second);
+    mainChain.push_back(pair[0].first);
+    pend.push_back(pair[0].second); 
+
+    //Le plus grand dans mainChain le plus petit dans pend
+    for (size_t i = 1; i < pair.size(); i++)
+    {
+        mainChain.push_back(pair[i].first);
+        pend.push_back(pair[i].second);        
+    }
+}
+
+void PmergeMe::insertPendDeq(std::deque<int> &mainChain, std::deque<int> &pend)
+{
+    if (pend.empty())
+        return;
+    
+    int n = pend.size();
+    std::deque<int> order = insertionOrderDeq(n);
+    
+    for (size_t i = 1; i < order.size(); i++)
+    {
+        int index = order[i];
+        int value = pend[index - 1]; //conversion 1-based 0-based
+
+        //recupere la position a laquelle je dois inserer value
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), value);
+        mainChain.insert(pos, value);
+    }
+    
+    if (_odd != -1)
+    {
+        std::deque<int>::iterator pos = std::lower_bound(mainChain.begin(), mainChain.end(), _odd);
+        mainChain.insert(pos, _odd);
+    }
+}
+
+void PmergeMe::processDeq()
+{
+    //Affichage avant
+    displayBefore();
+    
+    //Debut du chrono
+    clock_t start = clock();
+    
+    //Algorithme de tri
+    std::deque<std::pair<int, int> > pairs = makePairsDeq();
+    mergeSortDeq(pairs);
+    
+    std::deque<int> mainChain;
+    std::deque<int> pend;
+    separateDeq(pairs, mainChain, pend);
+
+    insertPendDeq(mainChain, pend);
+    
+    //Fin du chrono
+    clock_t end = clock();
+    double elapsed = (double)(end - start) / CLOCKS_PER_SEC * 1000000.0;
+
+    std::cout << "After : ";
+    for (size_t i = 0; i < mainChain.size(); i++)
+        std::cout << mainChain[i] << " ";
+    std::cout << std::endl;
+    
+    std::cout << "Time to process a range of " << _deque.size() << " elements with std::deque : " << std::fixed << std::setprecision(5) << elapsed << " us" << std::endl;
+    
+}
         
 
-int main(int argc, char **argv)
-{
-    try
-    {
-        if (argc < 2)
-        {
-            throw PmergeMe::ArgMissing();
-        }
-        PmergeMe test(argv);
-        test.processVec();
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    return 0;
-}
+// int main(int argc, char **argv)
+// {
+//     try
+//     {
+//         if (argc < 2)
+//         {
+//             throw PmergeMe::ArgMissing();
+//         }
+//         PmergeMe test(argv);
+//         test.processVec();
+//     }
+//     catch(const std::exception& e)
+//     {
+//         std::cerr << e.what() << '\n';
+//     }
+//     return 0;
+// }
 

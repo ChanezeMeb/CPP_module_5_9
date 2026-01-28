@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/08 15:27:43 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/22 12:42:30 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/28 18:32:19 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,11 @@ class PmergeMe
         void separateDeq(std::deque<std::pair<int, int> > &pair, std::deque<int> &mainChain, std::deque<int> &pend);
         void insertPendDeq(std::deque<int> &mainChain, std::deque<int> &pend);
         
-        std::vector<int> jacobSthal(int n); //fonction qui calcule l'indice de jacobsthal
-        std::vector<int> insertionOrder(int n);
+        std::vector<int> jacobSthalVec(int n); //fonction qui calcule l'indice de jacobsthal
+        std::vector<int> insertionOrderVec(int n);
+
+        std::deque<int> jacobSthalDeq(int n); //fonction qui calcule l'indice de jacobsthal
+        std::deque<int> insertionOrderDeq(int n);
         void parsing(char**argv); //fonction parsing
     public :
         
