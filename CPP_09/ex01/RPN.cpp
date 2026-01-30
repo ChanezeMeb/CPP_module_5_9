@@ -6,7 +6,7 @@
 /*   By: chamebar <chamebar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/01/07 12:21:55 by chamebar          #+#    #+#             */
-/*   Updated: 2026/01/08 12:41:31 by chamebar         ###   ########.fr       */
+/*   Updated: 2026/01/30 06:40:00 by chamebar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void RPN::calculate(const std::string& str)
 	{
 		if (token.size() != 1)
 		{
-			std::cerr << "Error : digit must be < 10" << std::endl;
+			std::cerr << "Error : digit must be < 10 and >= 0" << std::endl;
 			return;
 		}
 		if (!(std::isdigit(token[0]) || token[0] == '+' || token[0] == '-' ||token[0] == '*' || token[0] == '/'))
